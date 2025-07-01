@@ -1,3 +1,4 @@
+// Builder.io registry file - commented out for now
 /*
 import { Builder } from "@builder.io/react";
 
@@ -20,3 +21,6 @@ Builder.register("editor.settings", {
   },
 });
 */
+
+// Export empty object to make this a valid module
+export {};
