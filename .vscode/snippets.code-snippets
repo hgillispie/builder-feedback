@@ -1,0 +1,24 @@
+{
+	"Component": {
+		"prefix": "nxcomp",
+		"body": [
+			"import type { NextComponentType } from \"next\";",
+			"",
+			"const Componentname: NextComponentType = () => {",
+			"  return (",
+			"    <>",
+			"      <p>",
+			"         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum deserunt recusandae totam placeat ratione assumenda eius vitae facere ipsam eaque sapiente ex rem, voluptatibus, temporibus omnis explicabo officiis impedit praesentium!",
+			"     </p>",
+			"",
+			"    ",
+			"    </>",
+			" );",
+			"};",
+			"",
+			"export default Componentname;",
+			""
+		],
+		"description": "Component"
+	}
+}
