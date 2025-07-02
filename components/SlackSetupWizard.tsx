@@ -582,7 +582,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                 🧪 Test Your Integration
               </Text>
               <Text fontSize="sm" color="gray.600">
-                When you click &quot;Complete Setup&quot;, we&apos;ll send a
+                When you click &quot;Send Test Message&quot;, we&apos;ll send a
                 live test message to your Slack channel using the webhook URL
                 you provided. Check your Slack workspace!
               </Text>
