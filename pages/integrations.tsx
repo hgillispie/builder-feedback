@@ -261,17 +261,35 @@ const Integrations: NextPage = () => {
                       <Flex justify="space-between" align="center" pt={4}>
                         <Button
                           size="sm"
-                          variant="outline"
-                          borderColor="purple"
-                          color="purple"
+                          variant={
+                            isConnected(integration.name) ? "solid" : "outline"
+                          }
+                          bg={
+                            isConnected(integration.name)
+                              ? "green.500"
+                              : "transparent"
+                          }
+                          borderColor={
+                            isConnected(integration.name)
+                              ? "green.500"
+                              : "purple"
+                          }
+                          color={
+                            isConnected(integration.name) ? "white" : "purple"
+                          }
                           _hover={{
-                            bg: "brand.50",
+                            bg: isConnected(integration.name)
+                              ? "green.600"
+                              : "brand.50",
                           }}
-                          isDisabled={integration.status === "Coming Soon"}
+                          isDisabled={isConnected(integration.name)}
+                          onClick={() => handleConnect(integration.name)}
                         >
-                          {integration.status === "Available"
-                            ? "Connect"
-                            : "Notify Me"}
+                          {isConnected(integration.name)
+                            ? "Connected"
+                            : integration.name === "Slack"
+                              ? "Connect"
+                              : "Notify Me"}
                         </Button>
                         <Button
                           size="sm"
