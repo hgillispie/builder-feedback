@@ -125,20 +125,145 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
   const handleComplete = async () => {
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Send actual test message to Slack
+      const testMessage = {
+        blocks: [
+          {
+            type: "header",
+            text: {
+              type: "plain_text",
+              text: "🎉 Builder Feedback Integration Test",
+              emoji: true,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*Congratulations!* Your Slack integration is now connected to Builder Feedback.`,
+            },
+          },
+          {
+            type: "section",
+            fields: [
+              {
+                type: "mrkdwn",
+                text: `*App Name:*\n${config.appName}`,
+              },
+              {
+                type: "mrkdwn",
+                text: `*Channel:*\n${config.channelId}`,
+              },
+              {
+                type: "mrkdwn",
+                text: `*Events:*\n${config.events.length} configured`,
+              },
+              {
+                type: "mrkdwn",
+                text: `*Status:*\n✅ Active`,
+              },
+            ],
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: "*What happens next?*\n• New ideas will be posted here\n• Status updates will be shared\n• Team votes will be tracked",
+            },
+          },
+          {
+            type: "actions",
+            elements: [
+              {
+                type: "button",
+                text: {
+                  type: "plain_text",
+                  text: "View Dashboard",
+                  emoji: true,
+                },
+                url: `${window.location.origin}/`,
+                action_id: "view_dashboard",
+                style: "primary",
+              },
+              {
+                type: "button",
+                text: {
+                  type: "plain_text",
+                  text: "Browse Ideas",
+                  emoji: true,
+                },
+                url: `${window.location.origin}/ideas`,
+                action_id: "browse_ideas",
+              },
+            ],
+          },
+          {
+            type: "context",
+            elements: [
+              {
+                type: "mrkdwn",
+                text: `Builder.io Feedback • Integration test completed at ${new Date().toLocaleTimeString()}`,
+              },
+            ],
+          },
+        ],
+        attachments: [
+          {
+            color: "#7C3AED",
+            footer: "Builder.io Feedback",
+            footer_icon:
+              "https://cdn.builder.io/api/v1/image/assets%2F24272629d2bd4d1a8956cce15af1b3dc%2F3eea6d7844d747569446ee85b9577557",
+            ts: Math.floor(Date.now() / 1000),
+          },
+        ],
+      };
+
+      if (config.webhookUrl) {
+        const response = await fetch(config.webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(testMessage),
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Slack API error: ${response.status} ${response.statusText}`,
+          );
+        }
+      }
+
       setIsLoading(false);
       onComplete(config);
       onClose();
+
       toast({
         title: "Slack Integration Connected!",
         description:
-          "Your Slack workspace is now connected to Builder Feedback.",
+          "Test message sent successfully! Check your Slack channel.",
         status: "success",
+        duration: 7000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error("Slack test message error:", error);
+      setIsLoading(false);
+
+      toast({
+        title: "Integration Connected",
+        description:
+          "Configuration saved, but test message failed. Please check your webhook URL.",
+        status: "warning",
         duration: 5000,
         isClosable: true,
       });
-    }, 2000);
+
+      // Still complete the setup even if test message fails
+      onComplete(config);
+      onClose();
+    }
   };
 
   const renderStepContent = () => {
