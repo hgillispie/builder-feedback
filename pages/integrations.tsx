@@ -354,6 +354,13 @@ const Integrations: NextPage = () => {
           </Card>
         </VStack>
       </Container>
+
+      {/* Slack Setup Wizard */}
+      <SlackSetupWizard
+        isOpen={isSlackWizardOpen}
+        onClose={() => setIsSlackWizardOpen(false)}
+        onComplete={handleSlackSetupComplete}
+      />
     </Box>
   );
 };
