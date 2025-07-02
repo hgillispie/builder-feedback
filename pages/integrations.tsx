@@ -127,20 +127,8 @@ const Integrations: NextPage = () => {
   }, [router.query, toast]);
 
   const handleConnect = async (integrationName: string) => {
-    // Mock user ID - in real app, get from auth context
-    const userId = "mock-user-id";
-
     if (integrationName === "Slack") {
-      const success = await initiateSlackOAuth(userId);
-      if (!success) {
-        toast({
-          title: "Connection Error",
-          description: "Failed to initiate Slack connection.",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
+      setIsSlackWizardOpen(true);
     } else {
       toast({
         title: "Coming Soon",
@@ -150,6 +138,11 @@ const Integrations: NextPage = () => {
         isClosable: true,
       });
     }
+  };
+
+  const handleSlackSetupComplete = (config: any) => {
+    console.log("Slack configuration:", config);
+    setConnectedIntegrations((prev) => [...prev, "Slack"]);
   };
 
   const isConnected = (name: string) => connectedIntegrations.includes(name);
