@@ -604,9 +604,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
               <Text fontSize="sm" color="gray.600">
                 When you click &quot;Send Test Message&quot;, we&apos;ll send a
                 live test message to your Slack channel using the webhook URL
-                you provided. Due to browser security (CORS), we can&apos;t
-                confirm delivery, but the message should appear in your Slack
-                workspace!
+                you provided. You should see the message appear in your Slack
+                workspace immediately!
               </Text>
             </Box>
 
