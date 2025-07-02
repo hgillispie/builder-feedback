@@ -456,8 +456,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                 🧪 Test Your Integration
               </Text>
               <Text fontSize="sm" color="gray.600">
-                After connecting, we'll send a test message to your configured
-                channel to verify everything is working correctly.
+                After connecting, we&apos;ll send a test message to your
+                configured channel to verify everything is working correctly.
               </Text>
             </Box>
 
