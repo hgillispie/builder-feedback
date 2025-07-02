@@ -191,8 +191,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                 💡 Pro Tip
               </Text>
               <Text fontSize="sm" color="gray.600">
-                Use a descriptive name like "Builder Feedback" so your team
-                knows what this integration does.
+                Use a descriptive name like &quot;Builder Feedback&quot; so your
+                team knows what this integration does.
               </Text>
             </Box>
           </VStack>
