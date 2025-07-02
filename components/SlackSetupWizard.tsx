@@ -124,7 +124,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
     });
   };
 
-    const handleComplete = async () => {
+  const handleComplete = async () => {
     if (hasError) {
       console.error("Component is in error state, preventing action");
       return;
@@ -687,7 +687,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
     }
   };
 
-    // Handle component errors
+  // Handle component errors
   if (hasError) {
     return (
       <Modal isOpen={isOpen} onClose={onClose} size="md">
@@ -701,8 +701,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
               <Box>
                 <AlertTitle>Setup Error</AlertTitle>
                 <AlertDescription>
-                  There was an error loading the Slack integration setup.
-                  Please try again or refresh the page.
+                  There was an error loading the Slack integration setup. Please
+                  try again or refresh the page.
                 </AlertDescription>
               </Box>
             </Alert>
@@ -730,77 +730,82 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
         size="xl"
         closeOnOverlayClick={false}
       >
-      <ModalOverlay />
-      <ModalContent maxW="600px">
-        <ModalHeader>
-          <VStack align="stretch" spacing={3}>
-            <HStack justify="space-between">
-              <Text>Slack Integration Setup</Text>
-              <Badge colorScheme="purple">
-                {currentStep} of {STEPS.length}
-              </Badge>
-            </HStack>
-            <Box>
-              <Progress
-                value={(currentStep / STEPS.length) * 100}
-                colorScheme="purple"
-                size="sm"
-              />
-              <HStack justify="space-between" mt={2}>
-                <Text fontSize="sm" fontWeight="semibold">
-                  {STEPS[currentStep - 1]?.title}
-                </Text>
-                <Text fontSize="xs" color="gray.500">
-                  {STEPS[currentStep - 1]?.description}
-                </Text>
+        <ModalOverlay />
+        <ModalContent maxW="600px">
+          <ModalHeader>
+            <VStack align="stretch" spacing={3}>
+              <HStack justify="space-between">
+                <Text>Slack Integration Setup</Text>
+                <Badge colorScheme="purple">
+                  {currentStep} of {STEPS.length}
+                </Badge>
               </HStack>
-            </Box>
-          </VStack>
-        </ModalHeader>
-        <ModalCloseButton />
+              <Box>
+                <Progress
+                  value={(currentStep / STEPS.length) * 100}
+                  colorScheme="purple"
+                  size="sm"
+                />
+                <HStack justify="space-between" mt={2}>
+                  <Text fontSize="sm" fontWeight="semibold">
+                    {STEPS[currentStep - 1]?.title}
+                  </Text>
+                  <Text fontSize="xs" color="gray.500">
+                    {STEPS[currentStep - 1]?.description}
+                  </Text>
+                </HStack>
+              </Box>
+            </VStack>
+          </ModalHeader>
+          <ModalCloseButton />
 
-        <ModalBody pb={6}>
-          <VStack spacing={6} align="stretch">
-            {renderStepContent()}
+          <ModalBody pb={6}>
+            <VStack spacing={6} align="stretch">
+              {renderStepContent()}
 
-            <Divider />
+              <Divider />
 
-            <HStack justify="space-between">
-              <Button
-                variant="ghost"
-                onClick={handlePrevious}
-                isDisabled={currentStep === 1}
-              >
-                Previous
-              </Button>
+              <HStack justify="space-between">
+                <Button
+                  variant="ghost"
+                  onClick={handlePrevious}
+                  isDisabled={currentStep === 1}
+                >
+                  Previous
+                </Button>
 
-              <HStack spacing={2}>
-                {currentStep < STEPS.length ? (
-                  <Button
-                    colorScheme="purple"
-                    onClick={handleNext}
-                    isDisabled={!canProceed()}
-                  >
-                    Next Step
-                  </Button>
-                ) : (
-                  <Button
-                    colorScheme="green"
-                    onClick={handleComplete}
-                    isLoading={isLoading}
-                    loadingText="Sending test message..."
-                    isDisabled={!canProceed()}
-                  >
-                    Send Test Message
-                  </Button>
-                )}
+                <HStack spacing={2}>
+                  {currentStep < STEPS.length ? (
+                    <Button
+                      colorScheme="purple"
+                      onClick={handleNext}
+                      isDisabled={!canProceed()}
+                    >
+                      Next Step
+                    </Button>
+                  ) : (
+                    <Button
+                      colorScheme="green"
+                      onClick={handleComplete}
+                      isLoading={isLoading}
+                      loadingText="Sending test message..."
+                      isDisabled={!canProceed()}
+                    >
+                      Send Test Message
+                    </Button>
+                  )}
+                </HStack>
               </HStack>
-            </HStack>
-          </VStack>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
-  );
+            </VStack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  } catch (renderError) {
+    console.error("SlackSetupWizard render error:", renderError);
+    setHasError(true);
+    return null;
+  }
 };
 
 export default SlackSetupWizard;
