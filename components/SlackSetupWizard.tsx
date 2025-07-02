@@ -271,7 +271,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
       toast({
         title: "Slack Integration Connected!",
         description:
-          "Test message sent successfully! Check your Slack channel.",
+          "Test message sent! Due to browser security, we can't confirm delivery, but check your Slack channel.",
         status: "success",
         duration: 7000,
         isClosable: true,
