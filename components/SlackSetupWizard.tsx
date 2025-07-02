@@ -423,9 +423,9 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                 }
                 placeholder="https://hooks.slack.com/services/..."
               />
-              <Text fontSize="xs" color="gray.500" mt={1}>
-                💡 For the demo: Use a real webhook URL to see the test message
-                in Slack
+              <Text fontSize="xs" color="green.600" mt={1}>
+                💡 Demo ready: Paste your webhook URL to send a live test
+                message to Slack!
               </Text>
               {!config.webhookUrl && (
                 <Text fontSize="xs" color="orange.500" mt={1}>
