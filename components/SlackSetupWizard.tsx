@@ -274,7 +274,9 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
       toast({
         title: "Slack Integration Connected!",
         description:
-          "Test message sent! Due to browser security, we can't confirm delivery, but check your Slack channel.",
+          config.webhookUrl && config.webhookUrl.trim()
+            ? "Test message sent! Due to browser security, we can't confirm delivery, but check your Slack channel."
+            : "Integration configured successfully! Add a webhook URL to receive live messages.",
         status: "success",
         duration: 7000,
         isClosable: true,
