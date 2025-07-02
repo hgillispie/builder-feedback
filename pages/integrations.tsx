@@ -138,13 +138,24 @@ const Integrations: NextPage = () => {
   }, [router.isReady, router.query, router, toast]);
 
   const handleConnect = async (integrationName: string) => {
-    if (integrationName === "Slack") {
-      setIsSlackWizardOpen(true);
-    } else {
+    try {
+      if (integrationName === "Slack") {
+        setIsSlackWizardOpen(true);
+      } else {
+        toast({
+          title: "Coming Soon",
+          description: `${integrationName} integration is not yet available.`,
+          status: "info",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error in handleConnect:", error);
       toast({
-        title: "Coming Soon",
-        description: `${integrationName} integration is not yet available.`,
-        status: "info",
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
@@ -152,8 +163,13 @@ const Integrations: NextPage = () => {
   };
 
   const handleSlackSetupComplete = (config: any) => {
-    console.log("Slack configuration:", config);
-    setConnectedIntegrations((prev) => [...prev, "Slack"]);
+    try {
+      console.log("Slack configuration:", config);
+      setConnectedIntegrations((prev) => [...prev, "Slack"]);
+    } catch (error) {
+      console.error("Error in handleSlackSetupComplete:", error);
+      setPageError("Failed to complete Slack setup");
+    }
   };
 
   const isConnected = (name: string) => connectedIntegrations.includes(name);
