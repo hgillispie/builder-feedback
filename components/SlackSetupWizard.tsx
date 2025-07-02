@@ -643,7 +643,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
       case 2:
         return config.clientId && config.clientSecret && config.signingSecret;
       case 3:
-        return config.channelId; // Webhook URL is optional for demo
+        return config.webhookUrl && config.channelId; // Both required for reliable messaging
       case 4:
         return config.botToken && config.events.length > 0;
       case 5:
