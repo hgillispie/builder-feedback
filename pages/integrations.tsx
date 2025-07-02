@@ -102,29 +102,39 @@ const Integrations: NextPage = () => {
 
   // Handle OAuth callback results
   useEffect(() => {
-    if (router.query.slack === "connected") {
-      toast({
-        title: "Slack Connected!",
-        description: "Your Slack workspace has been successfully connected.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-      setConnectedIntegrations((prev) => [...prev, "Slack"]);
-      // Clean up URL
-      router.replace("/integrations", undefined, { shallow: true });
-    } else if (router.query.slack === "error") {
-      toast({
-        title: "Connection Failed",
-        description: "There was an error connecting your Slack workspace.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-      // Clean up URL
-      router.replace("/integrations", undefined, { shallow: true });
+    if (!router.isReady) return; // Wait for router to be ready
+
+    try {
+      if (router.query.slack === "connected") {
+        toast({
+          title: "Slack Connected!",
+          description: "Your Slack workspace has been successfully connected.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        setConnectedIntegrations((prev) => [...prev, "Slack"]);
+        // Clean up URL
+        router
+          .replace("/integrations", undefined, { shallow: true })
+          .catch(console.error);
+      } else if (router.query.slack === "error") {
+        toast({
+          title: "Connection Failed",
+          description: "There was an error connecting your Slack workspace.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        // Clean up URL
+        router
+          .replace("/integrations", undefined, { shallow: true })
+          .catch(console.error);
+      }
+    } catch (error) {
+      console.error("Error handling OAuth callback:", error);
     }
-  }, [router.query, router, toast]);
+  }, [router.isReady, router.query, router, toast]);
 
   const handleConnect = async (integrationName: string) => {
     if (integrationName === "Slack") {
