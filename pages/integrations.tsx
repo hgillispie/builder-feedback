@@ -211,13 +211,17 @@ const Integrations: NextPage = () => {
                           </Heading>
                           <Badge
                             colorScheme={
-                              integration.status === "Available"
+                              isConnected(integration.name)
                                 ? "green"
-                                : "yellow"
+                                : integration.status === "Available"
+                                  ? "blue"
+                                  : "yellow"
                             }
                             variant="subtle"
                           >
-                            {integration.status}
+                            {isConnected(integration.name)
+                              ? "Connected"
+                              : integration.status}
                           </Badge>
                         </HStack>
                         <Text size="sm" color="gray.500" mb={1}>
