@@ -262,6 +262,9 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
             throw fetchError;
           }
         }
+      } else {
+        // No webhook URL provided - complete setup without sending test message
+        console.log("No webhook URL provided - skipping test message");
       }
 
       setIsLoading(false);
