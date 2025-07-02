@@ -332,7 +332,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                 {window.location.origin}/api/integrations/slack
               </Code>
               <Text fontSize="xs" color="gray.600" mt={2}>
-                Add this URL to your Slack app's OAuth redirect URLs
+                Add this URL to your Slack app&apos;s OAuth redirect URLs
               </Text>
             </Box>
           </VStack>
