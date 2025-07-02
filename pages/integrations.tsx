@@ -92,6 +92,66 @@ const categories = [
 ];
 
 const Integrations: NextPage = () => {
+  const router = useRouter();
+  const toast = useToast();
+  const [connectedIntegrations, setConnectedIntegrations] = useState<string[]>(
+    [],
+  );
+
+  // Handle OAuth callback results
+  useEffect(() => {
+    if (router.query.slack === "connected") {
+      toast({
+        title: "Slack Connected!",
+        description: "Your Slack workspace has been successfully connected.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      setConnectedIntegrations((prev) => [...prev, "Slack"]);
+      // Clean up URL
+      router.replace("/integrations", undefined, { shallow: true });
+    } else if (router.query.slack === "error") {
+      toast({
+        title: "Connection Failed",
+        description: "There was an error connecting your Slack workspace.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      // Clean up URL
+      router.replace("/integrations", undefined, { shallow: true });
+    }
+  }, [router.query, toast]);
+
+  const handleConnect = async (integrationName: string) => {
+    // Mock user ID - in real app, get from auth context
+    const userId = "mock-user-id";
+
+    if (integrationName === "Slack") {
+      const success = await initiateSlackOAuth(userId);
+      if (!success) {
+        toast({
+          title: "Connection Error",
+          description: "Failed to initiate Slack connection.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else {
+      toast({
+        title: "Coming Soon",
+        description: `${integrationName} integration is not yet available.`,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const isConnected = (name: string) => connectedIntegrations.includes(name);
+
   return (
     <Box minH="100vh" bg="gray.50">
       <Header />
