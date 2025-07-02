@@ -125,6 +125,11 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
   };
 
   const handleComplete = async () => {
+    if (hasError) {
+      console.error("Component is in error state, preventing action");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
