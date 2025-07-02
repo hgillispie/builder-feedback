@@ -99,6 +99,7 @@ const Integrations: NextPage = () => {
     [],
   );
   const [isSlackWizardOpen, setIsSlackWizardOpen] = useState(false);
+  const [pageError, setPageError] = useState<string | null>(null);
 
   // Handle OAuth callback results
   useEffect(() => {
