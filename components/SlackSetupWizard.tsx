@@ -270,12 +270,27 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
       console.error("Slack test message error:", error);
       setIsLoading(false);
 
+      // Extract more specific error message if available
+      let errorDescription =
+        "Configuration saved, but test message failed. Please check your webhook URL.";
+      if (error instanceof Error) {
+        if (error.message.includes("Invalid webhook URL")) {
+          errorDescription =
+            "Invalid webhook URL. Please create a fresh webhook URL from your Slack app settings.";
+        } else if (error.message.includes("expired")) {
+          errorDescription =
+            "Webhook URL may be expired. Please create a new one in your Slack app.";
+        } else if (error.message.includes("permissions")) {
+          errorDescription =
+            "Permission denied. Check your Slack app permissions and webhook configuration.";
+        }
+      }
+
       toast({
-        title: "Integration Connected",
-        description:
-          "Configuration saved, but test message failed. Please check your webhook URL.",
+        title: "Test Message Failed",
+        description: errorDescription,
         status: "warning",
-        duration: 5000,
+        duration: 7000,
         isClosable: true,
       });
 
