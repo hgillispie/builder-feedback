@@ -76,6 +76,15 @@ const Header = () => {
               Roadmap
             </Button>
           </Link>
+          <Link href="/integrations">
+            <Button
+              variant="ghost"
+              color="gray.600"
+              _hover={{ color: "purple" }}
+            >
+              Integrations
+            </Button>
+          </Link>
 
           {/* User Profile Dropdown */}
           {user && (
