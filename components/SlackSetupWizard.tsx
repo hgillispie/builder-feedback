@@ -232,11 +232,19 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
           }),
         });
 
-        const result = await response.json();
-
         if (!response.ok) {
-          throw new Error(result.message || `Server error: ${response.status}`);
+          // Try to get error message from response
+          let errorMessage = `Server error: ${response.status}`;
+          try {
+            const errorResult = await response.json();
+            errorMessage = errorResult.message || errorMessage;
+          } catch {
+            // If JSON parsing fails, use default error message
+          }
+          throw new Error(errorMessage);
         }
+
+        const result = await response.json();
 
         console.log("Slack message sent successfully via proxy:", result);
       } else {
