@@ -416,6 +416,11 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                 💡 For the demo: Use a real webhook URL to see the test message
                 in Slack
               </Text>
+              {!config.webhookUrl && (
+                <Text fontSize="xs" color="orange.500" mt={1}>
+                  ⚠️ Webhook URL is required to send the test message
+                </Text>
+              )}
             </FormControl>
 
             <FormControl>
