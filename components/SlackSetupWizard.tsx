@@ -220,48 +220,25 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
       };
 
       if (config.webhookUrl && config.webhookUrl.trim()) {
-        try {
-          // Validate webhook URL format first
-          if (!config.webhookUrl.includes("hooks.slack.com")) {
-            throw new Error(
-              "Invalid webhook URL format. Please use a valid Slack webhook URL.",
-            );
-          }
+        // Send message via our backend proxy to avoid CORS issues
+        const response = await fetch("/api/slack-proxy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            webhookUrl: config.webhookUrl,
+            slackMessage: testMessage,
+          }),
+        });
 
-          const response = await fetch(config.webhookUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(testMessage),
-            mode: "no-cors", // This allows the request but we can't read the response
-          });
+        const result = await response.json();
 
-          // Since we're using no-cors mode, we can't check response.ok
-          // The request will be sent if the URL is valid
-          console.log("Slack webhook request sent (no-cors mode)");
-        } catch (fetchError: any) {
-          // Handle CORS or network errors
-          if (
-            fetchError.message.includes("Failed to fetch") ||
-            fetchError.message.includes("CORS") ||
-            fetchError.name === "TypeError"
-          ) {
-            // For demo purposes, if it's a valid-looking Slack webhook URL, treat as success
-            if (config.webhookUrl.includes("hooks.slack.com")) {
-              console.log(
-                "CORS may have blocked request - treating as success for demo",
-              );
-              // Continue to success flow (the message likely was sent despite CORS error)
-            } else {
-              throw new Error(
-                "Invalid webhook URL format. Please use a valid Slack webhook URL.",
-              );
-            }
-          } else {
-            throw fetchError;
-          }
+        if (!response.ok) {
+          throw new Error(result.message || `Server error: ${response.status}`);
         }
+
+        console.log("Slack message sent successfully via proxy:", result);
       } else {
         // No webhook URL provided - complete setup without sending test message
         console.log("No webhook URL provided - skipping test message");
