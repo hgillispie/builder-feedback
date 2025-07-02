@@ -697,10 +697,10 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                     colorScheme="green"
                     onClick={handleComplete}
                     isLoading={isLoading}
-                    loadingText="Connecting..."
+                    loadingText="Sending test message..."
                     isDisabled={!canProceed()}
                   >
-                    Complete Setup
+                    Send Test Message
                   </Button>
                 )}
               </HStack>
