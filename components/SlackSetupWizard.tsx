@@ -71,6 +71,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
   onClose,
   onComplete,
 }) => {
+  // Error boundary state
+  const [hasError, setHasError] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [config, setConfig] = useState<SlackConfig>({
     appName: "Builder Feedback",
