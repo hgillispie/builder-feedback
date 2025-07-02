@@ -219,7 +219,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
         ],
       };
 
-      if (config.webhookUrl) {
+      if (config.webhookUrl && config.webhookUrl.trim()) {
         try {
           // Validate webhook URL format first
           if (!config.webhookUrl.includes("hooks.slack.com")) {
