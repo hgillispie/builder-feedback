@@ -540,7 +540,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
               <AlertIcon />
               <AlertTitle>Configuration Complete!</AlertTitle>
               <AlertDescription>
-                Review your settings and test the connection.
+                Review your settings and send a test message to your Slack
+                channel.
               </AlertDescription>
             </Alert>
 
