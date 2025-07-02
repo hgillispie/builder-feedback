@@ -98,6 +98,7 @@ const Integrations: NextPage = () => {
   const [connectedIntegrations, setConnectedIntegrations] = useState<string[]>(
     [],
   );
+  const [isSlackWizardOpen, setIsSlackWizardOpen] = useState(false);
 
   // Handle OAuth callback results
   useEffect(() => {
