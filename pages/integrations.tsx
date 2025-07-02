@@ -23,6 +23,7 @@ import { LinkIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import { initiateSlackOAuth } from "../utils/slack";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import SlackSetupWizard from "../components/SlackSetupWizard";
 
 const integrations = [
   {
