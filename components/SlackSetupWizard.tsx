@@ -207,8 +207,8 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
             </Alert>
 
             <Text fontSize="sm" color="gray.600">
-              In your Slack app settings, go to "OAuth & Permissions" and add
-              these bot token scopes:
+              In your Slack app settings, go to &quot;OAuth &amp;
+              Permissions&quot; and add these bot token scopes:
             </Text>
 
             <Box bg="gray.50" p={4} borderRadius="md">
