@@ -124,7 +124,7 @@ const Integrations: NextPage = () => {
       // Clean up URL
       router.replace("/integrations", undefined, { shallow: true });
     }
-  }, [router.query, toast]);
+  }, [router.query, router, toast]);
 
   const handleConnect = async (integrationName: string) => {
     if (integrationName === "Slack") {
