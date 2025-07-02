@@ -174,6 +174,32 @@ const Integrations: NextPage = () => {
 
   const isConnected = (name: string) => connectedIntegrations.includes(name);
 
+  // Display error state if needed
+  if (pageError) {
+    return (
+      <Box minH="100vh" bg="gray.50">
+        <Header />
+        <Container maxW="container.xl" py={16}>
+          <VStack spacing={8} align="center">
+            <Heading size="lg" color="red.500">
+              Integration Error
+            </Heading>
+            <Text color="gray.600">{pageError}</Text>
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                setPageError(null);
+                router.reload();
+              }}
+            >
+              Reload Page
+            </Button>
+          </VStack>
+        </Container>
+      </Box>
+    );
+  }
+
   return (
     <Box minH="100vh" bg="gray.50">
       <Header />
