@@ -470,10 +470,11 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
                   file:
                   <Box mt={2} p={2} bg="white" borderRadius="md">
                     <Code fontSize="xs" display="block">
-                      SLACK_CLIENT_ID="{config.clientId}"<br />
-                      SLACK_CLIENT_SECRET="***"
+                      SLACK_CLIENT_ID=&quot;{config.clientId}&quot;
                       <br />
-                      SLACK_SIGNING_SECRET="***"
+                      SLACK_CLIENT_SECRET=&quot;***&quot;
+                      <br />
+                      SLACK_SIGNING_SECRET=&quot;***&quot;
                     </Code>
                   </Box>
                 </AlertDescription>
