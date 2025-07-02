@@ -124,7 +124,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
     });
   };
 
-  const handleComplete = async () => {
+    const handleComplete = async () => {
     if (hasError) {
       console.error("Component is in error state, preventing action");
       return;
@@ -687,13 +687,49 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
     }
   };
 
-  return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      size="xl"
-      closeOnOverlayClick={false}
-    >
+    // Handle component errors
+  if (hasError) {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Integration Setup Error</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Alert status="error">
+              <AlertIcon />
+              <Box>
+                <AlertTitle>Setup Error</AlertTitle>
+                <AlertDescription>
+                  There was an error loading the Slack integration setup.
+                  Please try again or refresh the page.
+                </AlertDescription>
+              </Box>
+            </Alert>
+            <Button
+              mt={4}
+              colorScheme="blue"
+              onClick={() => {
+                setHasError(false);
+                onClose();
+              }}
+            >
+              Close
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
+
+  try {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size="xl"
+        closeOnOverlayClick={false}
+      >
       <ModalOverlay />
       <ModalContent maxW="600px">
         <ModalHeader>
