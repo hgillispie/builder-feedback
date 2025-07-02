@@ -1,3 +1,44 @@
+/**
+ * SLACK CORS PROXY ENDPOINT - SOLVES BROWSER CORS LIMITATIONS
+ *
+ * PURPOSE:
+ * This proxy endpoint bypasses browser CORS restrictions when sending messages to Slack webhooks.
+ * Without this, direct browser -> Slack webhook calls fail due to CORS policy.
+ *
+ * ARCHITECTURE:
+ * Browser -> Our Proxy (/api/slack-proxy) -> Slack Webhook -> Response -> Browser
+ *
+ * ACTIVATION:
+ * - This file is ready to use immediately
+ * - Called automatically by SlackSetupWizard component during test message sending
+ * - No modifications needed
+ *
+ * FUNCTIONALITY:
+ * ✅ Accepts webhook URL and message payload from frontend
+ * ✅ Validates Slack webhook URL format
+ * ✅ Forwards request to Slack with proper headers
+ * ✅ Returns real success/failure responses to frontend
+ * ✅ Provides user-friendly error messages for common Slack errors
+ * ✅ Comprehensive error handling and logging
+ *
+ * ERROR HANDLING:
+ * - 404 no_service: Invalid/expired webhook URL -> User-friendly message
+ * - 403: Access denied -> Permission guidance
+ * - 400: Bad request -> Format guidance
+ * - Network errors: Connection guidance
+ *
+ * SECURITY:
+ * - Only accepts POST requests
+ * - Validates webhook URL format (must contain 'hooks.slack.com')
+ * - No sensitive data stored or logged permanently
+ * - Clean error responses without exposing internal details
+ *
+ * USAGE:
+ * POST /api/slack-proxy
+ * Body: { webhookUrl: string, slackMessage: object }
+ * Response: { message: string, error: boolean, data?: object }
+ */
+
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
