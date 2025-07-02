@@ -169,7 +169,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
               </ListItem>
               <ListItem>
                 <ListIcon as={CheckIcon} color="green.500" />
-                Click "Create New App" → "From scratch"
+                Click &quot;Create New App&quot; → &quot;From scratch&quot;
               </ListItem>
               <ListItem>
                 <ListIcon as={CheckIcon} color="green.500" />
