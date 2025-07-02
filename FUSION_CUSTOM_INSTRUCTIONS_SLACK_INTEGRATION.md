@@ -416,21 +416,106 @@ This ensures clean starting state while keeping all working backend logic ready 
 
 ## 📸 Visual Reference
 
-### Integrations Page Layout:
+### Integrations Page Layout (Screenshot 1):
 
-- Clean header with centered title and subtitle
-- Category filter bar with purple "All" button selected
-- 2x2 grid of integration cards with consistent spacing
-- Each card has header (logo + title + badge), body (description + features), footer (buttons)
-- Bottom CTA section with purple buttons
+**Exact Design Specifications:**
 
-### Setup Wizard Flow:
+- **Header**: Centered "Integrations" title (size: 2xl, color: gray.900)
+- **Subtitle**: "Connect Builder Feedback with your favorite tools to streamline your workflow and keep your team in sync" (size: lg, color: gray.600, centered, max-width: 3xl)
+- **Category Filter**: Horizontal button group with purple "All" selected, others outlined
+  - Buttons: All | Communication | Development | Community | Automation
+  - Active button: solid purple background, white text
+  - Inactive buttons: outline style, purple border/text
+- **Grid Layout**: 2x2 responsive grid (1 column on mobile, 2 on desktop)
+- **Card Structure**: Each card has consistent height, white background, rounded corners, subtle shadow
 
-- Modal overlay with progress indicator (1 of 5, 2 of 5, etc.)
-- Each step has specific fields and helpful guidance
-- Consistent purple color scheme throughout
-- Final step shows configuration summary and test button
-- Success states with green indicators
+**Individual Card Layouts:**
+
+- **Slack Card** (Top Left):
+  - Logo: Slack colorful logo
+  - Title: "Slack" + "Communication" subtitle
+  - Badge: "COMING SOON" (yellow background)
+  - Description: "Get notified about feedback updates and new ideas directly in your Slack channels."
+  - Features list with bullet points
+  - Footer: "Connect" button (disabled) + "Learn More" link
+
+- **GitHub Card** (Top Right): Mirror layout with GitHub logo, "Development" category
+- **Discord Card** (Bottom Left): Mirror layout with Discord logo, "Community" category
+- **Zapier Card** (Bottom Right): Mirror layout with Zapier logo, "Automation" category
+
+### Setup Wizard Screenshots (2-6):
+
+**Step 1 - Create Slack App (Screenshot 2):**
+
+- **Modal**: "Slack Integration Setup" title, "1 of 5" progress indicator
+- **Step Title**: "Create Slack App" with "Set up your Slack application" subtitle
+- **Alert**: Blue info alert with "Create a new Slack app" message
+- **Instructions**: Checklist format with green checkmarks:
+  - "Go to api.slack.com/apps" (external link)
+  - "Click 'Create New App' → 'From scratch'"
+  - "Enter app name and select your workspace"
+- **Form**: "App Name" field with "Builder Feedback" pre-filled
+- **Pro Tip**: Light gray box with 💡 icon and helpful guidance
+- **Footer**: "Previous" (disabled) and "Next Step" (purple) buttons
+
+**Step 2 - Configure OAuth (Screenshot 3):**
+
+- **Progress**: "2 of 5" indicator
+- **Alert**: Warning-style alert "Configure OAuth & Permissions"
+- **Instructions**: Detailed scopes list with code formatting
+- **Required Scopes**: Bulleted list with explanations:
+  - `incoming-webhook` - Send messages to channels
+  - `commands` - Create slash commands
+  - `users:read` - Read user information
+  - `chat:write` - Post messages
+- **Form Fields**:
+  - Client ID: Placeholder "1234567890.1234567890"
+  - Client Secret: Password field with placeholder
+  - Signing Secret: Password field with placeholder
+
+**Step 3 - Setup Webhook (Screenshot 4):**
+
+- **Progress**: "3 of 5" indicator
+- **Alert**: Info alert "Setup Incoming Webhooks"
+- **Form Fields**:
+  - Webhook URL: Text input with Slack webhook placeholder
+  - Default Channel: Dropdown showing "#general" selected
+- **Redirect URL Section**:
+  - Light blue background box
+  - Shows current domain + "/api/integrations/slack"
+  - "Copy" button on the right
+  - Small text: "Add this URL to your Slack app's OAuth redirect URLs"
+
+**Step 4 - Add Bot Token (Screenshot 5):**
+
+- **Progress**: "4 of 5" indicator
+- **Alert**: Success-style alert "Add Bot Token & Configure Events"
+- **Bot Token Field**: Password input with "xoxb-1234567890..." placeholder
+- **Event Notifications**: Checkbox list with:
+  - ✅ "New ideas submitted" (checked, with "RECOMMENDED" blue badge)
+  - ✅ "Ideas status updated" (checked)
+  - ❌ "Ideas receive votes (milestones)" (unchecked)
+  - ❌ "New comments added" (unchecked)
+
+**Step 5 - Test & Complete (Screenshot 6):**
+
+- **Progress**: "5 of 5" indicator
+- **Alert**: Success alert "Configuration Complete!"
+- **Configuration Summary**: Clean table layout:
+  - App Name: Builder Feedback
+  - Channel: #general
+  - Events: 2 selected
+  - Status: "READY TO CONNECT" (green badge)
+- **Test Section**:
+  - Green checkmark + "Test Your Integration" title
+  - Description about sending live test message
+- **Environment Variables**: Blue info box with code block:
+  ```
+  SLACK_CLIENT_ID="1"
+  SLACK_CLIENT_SECRET="***"
+  SLACK_SIGNING_SECRET="***"
+  ```
+- **Final Button**: "Send Test Message" (purple background, prominent)
 
 ### Error Handling:
 
