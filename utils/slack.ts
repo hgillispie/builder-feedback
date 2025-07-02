@@ -1,3 +1,20 @@
+/**
+ * SLACK UTILITY FUNCTIONS - READY FOR ACTIVATION
+ *
+ * ACTIVATION INSTRUCTIONS:
+ * When Prompt 3 containing "FUSION_DEMO" is received, these utility functions
+ * will be automatically activated by the SlackSetupWizard component.
+ *
+ * FUNCTIONS AVAILABLE:
+ * - sendSlackNotification: Send notifications via CORS proxy
+ * - initiateSlackOAuth: Start OAuth flow for workspace connection
+ * - disconnectSlack: Disconnect existing integration
+ *
+ * USAGE:
+ * These functions are called by the integrations page and setup wizard.
+ * They handle the frontend-to-backend communication for Slack integration.
+ */
+
 // Utility for sending Slack notifications
 export const sendSlackNotification = async (
   type: "idea_created" | "idea_updated" | "idea_voted",
