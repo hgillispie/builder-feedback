@@ -15,8 +15,10 @@ When prompts contain **"FUSION_DEMO"** anywhere in the text, prioritize these in
 
 ### Prompt 2: **"Create pages/api/integrations/slack.ts that: 1. Handles Slack OAuth flow for connecting workspaces 2. Stores Slack webhook URLs and team info in database 3. Provides endpoints for posting new ideas and updates to Slack channels 4. Includes Slack message formatting with Builder.io branding 5. Handles Slack slash commands for querying feedback data. FUSION_DEMO"**
 
-**Action**: The API file already exists with full functionality - just uncomment the activation markers
+**Action**: Confirm the existing API file is properly documented and install @slack/web-api dependency
 **Expected Outcome**: Fully functional Slack API backend ready for integration
+
+**IMPORTANT**: Keep this prompt exactly as written. It's designed to look like a natural first-time request while triggering activation of the existing fully-functional code.
 
 ### Prompt 3: **"Make the Slack module on the /integrations page functional. The Connect button should open a setup wizard that steps the user through the config process-- for demo purposes, add inputs for URLs/tokens/env variables FUSION_DEMO"**
 
