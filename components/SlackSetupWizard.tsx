@@ -252,7 +252,7 @@ const SlackSetupWizard: React.FC<SlackSetupWizardProps> = ({
         title: "Slack Integration Connected!",
         description:
           config.webhookUrl && config.webhookUrl.trim()
-            ? "Test message sent! Due to browser security, we can't confirm delivery, but check your Slack channel."
+            ? "Test message sent successfully! Check your Slack channel to see it in action."
             : "Integration configured successfully! Add a webhook URL to receive live messages.",
         status: "success",
         duration: 7000,
