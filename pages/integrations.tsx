@@ -314,8 +314,8 @@ const Integrations: NextPage = () => {
                     Need a Custom Integration?
                   </Heading>
                   <Text size="lg" color="gray.600" maxW="2xl" mx="auto">
-                    Don't see the integration you need? Let us know and we'll
-                    consider adding it to our roadmap.
+                    Don&apos;t see the integration you need? Let us know and
+                    we&apos;ll consider adding it to our roadmap.
                   </Text>
                 </Box>
 
