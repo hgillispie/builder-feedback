@@ -57,12 +57,28 @@ export default async function handler(
       const errorText = await slackResponse.text();
       console.error("Slack API error:", slackResponse.status, errorText);
 
-      res.status(slackResponse.status).json({
-        message: `Slack API error: ${slackResponse.status} ${slackResponse.statusText}`,
+      // Provide more helpful error messages for common Slack webhook issues
+      let userFriendlyMessage;
+      if (slackResponse.status === 404 && errorText.includes("no_service")) {
+        userFriendlyMessage =
+          "Invalid webhook URL. Please check that your Slack webhook URL is correct and active.";
+      } else if (slackResponse.status === 403) {
+        userFriendlyMessage =
+          "Access denied. Your webhook URL may be expired or missing permissions.";
+      } else if (slackResponse.status === 400) {
+        userFriendlyMessage =
+          "Bad request. There may be an issue with the message format.";
+      } else {
+        userFriendlyMessage = `Slack API error: ${slackResponse.status} ${slackResponse.statusText}`;
+      }
+
+      res.status(400).json({
+        message: userFriendlyMessage,
         error: true,
         data: {
           slackError: errorText,
           statusCode: slackResponse.status,
+          originalMessage: `${slackResponse.status} ${slackResponse.statusText}`,
         },
       });
       return;
