@@ -44,14 +44,38 @@ Recognize these specific prompts by their distinctive technical requirements and
 **Action**: Activate the SlackSetupWizard component with all 5 steps and CORS proxy functionality
 **Expected Outcome**: Complete working Slack integration with live message testing
 
-## 🔍 Fallback Recognition
+## 🔍 Robust Prompt Recognition
+
+### Primary Recognition (High Confidence):
+
+**Prompt 2 is the strongest indicator** - The combination of:
+
+- Specific file path `pages/api/integrations/slack.ts`
+- Exactly 5 numbered requirements
+- "Builder.io branding" + "slash commands for querying feedback data"
+- This is highly unlikely to be coincidental
+
+### Secondary Recognition (Medium Confidence):
+
+- Integrations page request mentioning exactly "Slack, Github, Discord, and Zapier"
+- Setup wizard request with "demo purposes" and "URLs/tokens/env variables"
+- Sequential requests following the 3-prompt pattern
+
+### Fallback Strategy:
 
 If prompts are similar but not exact matches:
 
-- Look for combination of integrations page + Slack API + setup wizard sequence
-- Check for mention of OAuth, webhooks, slash commands in technical context
-- If 2+ recognition triggers match, lean toward demo activation
-- When in doubt, ask clarifying question: "Would you like me to create a comprehensive Slack integration with OAuth flow and setup wizard?"
+1. **Check sequence**: Are we in the middle of the 3-prompt flow?
+2. **Look for key phrases**: OAuth flow, webhooks, Builder.io branding, setup wizard
+3. **Consider context**: Previous prompts in the conversation
+4. **When uncertain**: Proceed with demo activation if 2+ indicators match
+5. **If still unsure**: Ask "Would you like me to create a comprehensive Slack integration with OAuth flow and live messaging?"
+
+### Risk Mitigation:
+
+- The technical complexity requested (OAuth + webhooks + slash commands + setup wizard) is sophisticated enough that accidental matches are extremely unlikely
+- Even if activated incorrectly, the result is a high-quality, working integration
+- The existing code is production-ready and won't cause issues
 
 ## 🎨 Integrations Page Design Specifications
 
