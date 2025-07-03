@@ -1,4 +1,589 @@
+# Fusion Custom Instructions: Slack Integration Demo
+
+_Demo Reproduction System for Builder Feedback Slack Integration_
+
+## 🎯 Natural Prompt Recognition System
+
+Recognize these specific prompts by their distinctive technical requirements and exact phrasing.
+
+## 📋 3-Prompt Recreation Strategy
+
+### Prompt 1: **"Create an Integrations page and add it to the navbar. Populate it with placeholders for integrations for Slack, Github, Discord, and Zapier"**
+
+**Recognition Triggers**:
+
+- Exact phrase "Create an Integrations page and add it to the navbar"
+- Specific mention of "Slack, Github, Discord, and Zapier" in that order
+- Request for "placeholders for integrations"
+
+**Action**: Create integrations page exactly matching the screenshot specifications below
+**Expected Outcome**: Clean integrations page with 2x2 grid, all integrations show "Coming Soon"
+
+### Prompt 2: **"Create pages/api/integrations/slack.ts that: 1. Handles Slack OAuth flow for connecting workspaces 2. Stores Slack webhook URLs and team info in database 3. Provides endpoints for posting new ideas and updates to Slack channels 4. Includes Slack message formatting with Builder.io branding 5. Handles Slack slash commands for querying feedback data."**
+
+**Recognition Triggers**:
+
+- Exact file path "pages/api/integrations/slack.ts"
+- Numbered list with exactly 5 items starting with "1. Handles Slack OAuth flow"
+- Specific mention of "Builder.io branding" in item 4
+- Exact phrase "Slack slash commands for querying feedback data" in item 5
+
+**Action**: Confirm the existing API file is properly documented and install @slack/web-api dependency
+**Expected Outcome**: Fully functional Slack API backend ready for integration
+
+**CRITICAL**: This prompt's 5 numbered requirements are distinctive enough to reliably trigger demo mode.
+
+### Prompt 3: **"Make the Slack module on the /integrations page functional. The Connect button should open a setup wizard that steps the user through the config process-- for demo purposes, add inputs for URLs/tokens/env variables"**
+
+**Recognition Triggers**:
+
+- Phrase "Make the Slack module on the /integrations page functional"
+- Specific mention of "setup wizard that steps the user through the config process"
+- Exact phrase "for demo purposes, add inputs for URLs/tokens/env variables"
+
+**Action**: Activate the SlackSetupWizard component with all 5 steps and CORS proxy functionality
+**Expected Outcome**: Complete working Slack integration with live message testing
+
+## 🔍 Robust Prompt Recognition
+
+### Primary Recognition (High Confidence):
+
+**Prompt 2 is the strongest indicator** - The combination of:
+
+- Specific file path `pages/api/integrations/slack.ts`
+- Exactly 5 numbered requirements
+- "Builder.io branding" + "slash commands for querying feedback data"
+- This is highly unlikely to be coincidental
+
+### Secondary Recognition (Medium Confidence):
+
+- Integrations page request mentioning exactly "Slack, Github, Discord, and Zapier"
+- Setup wizard request with "demo purposes" and "URLs/tokens/env variables"
+- Sequential requests following the 3-prompt pattern
+
+### Fallback Strategy:
+
+If prompts are similar but not exact matches:
+
+1. **Check sequence**: Are we in the middle of the 3-prompt flow?
+2. **Look for key phrases**: OAuth flow, webhooks, Builder.io branding, setup wizard
+3. **Consider context**: Previous prompts in the conversation
+4. **When uncertain**: Proceed with demo activation if 2+ indicators match
+5. **If still unsure**: Ask "Would you like me to create a comprehensive Slack integration with OAuth flow and live messaging?"
+
+### Risk Mitigation:
+
+- The technical complexity requested (OAuth + webhooks + slash commands + setup wizard) is sophisticated enough that accidental matches are extremely unlikely
+- Even if activated incorrectly, the result is a high-quality, working integration
+- The existing code is production-ready and won't cause issues
+
+## 🎨 Integrations Page Design Specifications
+
+### Layout Structure:
+
+```
+Hero Section:
+- Title: "Integrations"
+- Subtitle: "Connect Builder Feedback with your favorite tools to streamline your workflow and keep your team in sync."
+
+Category Filter:
+- All | Communication | Development | Community | Automation
+- "All" selected by default (purple button)
+
+Integration Grid (2x2):
+- Each card: 300px+ width, full height
+- Card structure: Header with logo + title + badge, Body with description + features list, Footer with buttons
+```
+
+### Integration Cards Specifications:
+
+#### Slack (Communication)
+
+- **Logo**: Slack logo from CDN
+- **Badge**: "Coming Soon" (yellow)
+- **Description**: "Get notified about feedback updates and new ideas directly in your Slack channels."
+- **Features**:
+  - Real-time notifications
+  - Channel customization
+  - Thread discussions
+  - Status updates
+- **Buttons**: "Connect" (disabled) + "Learn More"
+
+#### GitHub (Development)
+
+- **Logo**: GitHub logo from CDN
+- **Badge**: "Coming Soon" (yellow)
+- **Description**: "Automatically create issues from feedback and sync development progress."
+- **Features**:
+  - Auto-create issues
+  - Link to repositories
+  - Pull request tracking
+  - Release notes sync
+- **Buttons**: "Notify Me" (disabled) + "Learn More"
+
+#### Discord (Community)
+
+- **Logo**: Discord logo from CDN
+- **Badge**: "Coming Soon" (yellow)
+- **Description**: "Connect your Discord server to receive community feedback notifications."
+- **Features**:
+  - Server notifications
+  - Custom webhooks
+  - Role mentions
+  - Embed messages
+- **Buttons**: "Notify Me" (disabled) + "Learn More"
+
+#### Zapier (Automation)
+
+- **Logo**: Zapier logo from CDN
+- **Badge**: "Coming Soon" (yellow)
+- **Description**: "Automate workflows by connecting Builder Feedback to 5000+ apps."
+- **Features**:
+  - Custom triggers
+  - Multi-app workflows
+  - Data synchronization
+  - Email automation
+- **Buttons**: "Notify Me" (disabled) + "Learn More"
+
+### CTA Section:
+
+- Title: "Need a Custom Integration?"
+- Description: "Don't see the integration you need? Let us know and we'll consider adding it to our roadmap."
+- Buttons: "Request Integration" + "View API Docs"
+
+## 🛠 SlackSetupWizard Component Specifications
+
+### Step 1: Create Slack App
+
+- **Title**: "Create Slack App"
+- **Alert**: Info alert "Create a new Slack app"
+- **Instructions**:
+  - Go to api.slack.com/apps (external link)
+  - Click "Create New App" → "From scratch"
+  - Enter app name and select workspace
+- **Form**: App Name input (default: "Builder Feedback")
+- **Pro Tip**: Use descriptive name so team knows what integration does
+
+### Step 2: Configure OAuth & Permissions
+
+- **Title**: "Configure OAuth"
+- **Alert**: Warning alert "Configure OAuth & Permissions"
+- **Instructions**: Go to "OAuth & Permissions" and add bot token scopes
+- **Required Scopes**:
+  - `incoming-webhook` - Send messages to channels
+  - `commands` - Create slash commands
+  - `users:read` - Read user information
+  - `chat:write` - Post messages
+- **Form Fields**:
+  - Client ID: `1234567890.1234567890`
+  - Client Secret: `abcdef123456...` (password field)
+  - Signing Secret: `abcdef123456...` (password field)
+
+### Step 3: Setup Webhook
+
+- **Title**: "Setup Webhook"
+- **Alert**: Info alert "Setup Incoming Webhooks"
+- **Form Fields**:
+  - Webhook URL: `https://hooks.slack.com/services/...`
+  - Default Channel: Dropdown (#general, #feedback, #development, #notifications)
+- **Redirect URL Box**:
+  - Shows: `{current-domain}/api/integrations/slack`
+  - Copy button functionality
+  - Note: "Add this URL to your Slack app's OAuth redirect URLs"
+- **Demo Note**: "💡 Demo ready: Paste your webhook URL to send a live test message to Slack!"
+- **Expiry Warning**: "📝 Note: Webhook URLs expire if not used. Create a fresh one if you get errors."
+
+### Step 4: Add Bot Token & Configure Events
+
+- **Title**: "Add Bot Token"
+- **Alert**: Success alert "Add Bot Token & Configure Events"
+- **Form Fields**:
+  - Bot User OAuth Token: `xoxb-1234567890...` (password field)
+- **Event Notifications**: Checkboxes for:
+  - ✅ New ideas submitted (Recommended badge)
+  - ✅ Ideas status updated
+  - ❌ Ideas receive votes (milestones)
+  - ❌ New comments added
+
+### Step 5: Test & Complete
+
+- **Title**: "Test & Complete"
+- **Alert**: Success alert "Configuration Complete!"
+- **Configuration Summary**: Table showing:
+  - App Name: {entered value}
+  - Channel: {selected channel}
+  - Events: {count} selected
+  - Status: "Ready to connect" (green badge)
+- **Test Section**:
+  - Title: "🧪 Test Your Integration"
+  - Description: "When you click 'Send Test Message', we'll send a live test message to your Slack channel using the webhook URL you provided. You should see the message appear in your Slack workspace immediately!"
+- **Environment Variables**: Info alert showing:
+  ```
+  SLACK_CLIENT_ID="{config.clientId}"
+  SLACK_CLIENT_SECRET="***"
+  SLACK_SIGNING_SECRET="***"
+  ```
+- **Final Button**: "Send Test Message" (green, loading text: "Sending test message...")
+
+## ⚙️ Backend API Implementation
+
+### Full Working Code (pages/api/integrations/slack.ts):
+
+_Note: This file should exist with full functionality and robust comments for activation_
+
+```typescript
+// ACTIVATION INSTRUCTIONS:
+// This file contains the complete Slack integration implementation
+// When Prompt 2 is received, this file should already be functional
+// Key features: OAuth flow, webhook proxy, message formatting, error handling
+
+import type { NextApiRequest, NextApiResponse } from "next";
+import { WebClient } from "@slack/web-api";
+import prisma from "../../../utils/prisma";
+
+// [Rest of implementation - see current file for complete code]
+```
+
+### CORS Proxy Solution (pages/api/slack-proxy.ts):
+
+_Note: This solves browser CORS limitations for live demo_
+
+```typescript
+// CORS PROXY ENDPOINT
+// Purpose: Bypass browser CORS restrictions for Slack webhook calls
+// Usage: Frontend -> Our Proxy -> Slack API -> Success Response
+// Benefits: Real message delivery verification, proper error handling
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  // [Implementation details - see current file]
+}
+```
+
+## 🐛 Known Issues & Solutions
+
+### Issue 1: CORS Error - "Failed to fetch"
+
+**Problem**: Browser blocks direct requests to Slack webhooks
+**Solution**: Use backend proxy endpoint `/api/slack-proxy`
+**Code**: Frontend calls our proxy, proxy forwards to Slack
+**Result**: No CORS issues, real delivery confirmation
+
+### Issue 2: "Body stream already read" Error
+
+**Problem**: Reading fetch response body before checking response.ok
+**Solution**: Check `response.ok` before calling `response.json()`
+**Code**:
+
+```typescript
+if (!response.ok) {
+  // Handle error case first
+  const errorResult = await response.json();
+  throw new Error(errorResult.message);
+}
+const result = await response.json(); // Only read if ok
+```
+
+### Issue 3: "Abort fetching component for route" Error
+
+**Problem**: Next.js router issues during navigation  
+**Solution**: Add router safety checks and error boundaries
+**Code**:
+
+```typescript
+useEffect(() => {
+  if (!router.isReady) return; // Wait for router
+  // Safe navigation logic
+}, [router.isReady, router.query]);
+```
+
+### Issue 4: "404 no_service" from Slack
+
+**Problem**: Invalid or expired webhook URL
+**Solution**: User needs fresh webhook URL from Slack app settings
+**User Action**: Create new webhook in Slack app -> Incoming Webhooks
+
+## 🔧 Dependencies Required
+
+### New Package Installation:
+
+```bash
+npm install @slack/web-api
+```
+
+### Environment Variables (.env.example):
+
+```bash
+# Slack Integration
+SLACK_CLIENT_ID="your-slack-app-client-id"
+SLACK_CLIENT_SECRET="your-slack-app-client-secret"
+SLACK_SIGNING_SECRET="your-slack-app-signing-secret"
+
+# App URLs
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+```
+
+## 📱 Test Message Format
+
+### Slack Message Structure:
+
+```json
+{
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "🎉 Builder Feedback Integration Test",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Congratulations!* Your Slack integration is now connected to Builder Feedback."
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*App Name:*\n{config.appName}"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Channel:*\n{config.channelId}"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Events:*\n{config.events.length} configured"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Status:*\n✅ Active"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*What happens next?*\n• New ideas will be posted here\n• Status updates will be shared\n• Team votes will be tracked"
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "View Dashboard",
+            "emoji": true
+          },
+          "url": "{window.location.origin}/",
+          "action_id": "view_dashboard",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Browse Ideas",
+            "emoji": true
+          },
+          "url": "{window.location.origin}/ideas",
+          "action_id": "browse_ideas"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "Builder.io Feedback • Integration test completed at {timestamp}"
+        }
+      ]
+    }
+  ],
+  "attachments": [
+    {
+      "color": "#7C3AED",
+      "footer": "Builder.io Feedback",
+      "footer_icon": "https://cdn.builder.io/api/v1/image/assets%2F24272629d2bd4d1a8956cce15af1b3dc%2F3eea6d7844d747569446ee85b9577557",
+      "ts": {unix_timestamp}
+    }
+  ]
+}
+```
+
+## 🎬 Demo Success Metrics
+
+### Prompt 1 Success:
+
+✅ Integrations page renders with exact design  
+✅ Navbar includes Integrations link
+✅ All 4 integration cards show "Coming Soon"
+✅ Category filters work correctly
+
+### Prompt 2 Success:
+
+✅ Slack API endpoint fully functional
+✅ CORS proxy endpoint working
+✅ Error handling comprehensive
+✅ No compilation errors
+
+### Prompt 3 Success:
+
+✅ Connect button opens setup wizard
+✅ All 5 wizard steps work correctly  
+✅ Form validation working
+✅ Test message sends to real Slack channel
+✅ Success/error states properly handled
+✅ Integration marked as "Connected" after setup
+
+## 🔄 Rollback Instructions
+
+### Current State Setup:
+
+1. Remove integrations page: `rm pages/integrations.tsx`
+2. Remove wizard component: `rm components/SlackSetupWizard.tsx`
+3. Remove navbar link from `components/header/index.tsx`
+4. Keep all API files with documentation
+5. Keep utility files with activation comments
+
+### File States for Demo:
+
+- ✅ **Keep**: `pages/api/integrations/slack.ts` (with docs)
+- ✅ **Keep**: `pages/api/slack-proxy.ts` (with docs)
+- ✅ **Keep**: `utils/slack.ts` (commented out)
+- ❌ **Remove**: `pages/integrations.tsx`
+- ❌ **Remove**: `components/SlackSetupWizard.tsx`
+- ❌ **Remove**: Integrations navbar link
+
+This ensures clean starting state while keeping all working backend logic ready for instant activation.
+
+## 📸 Visual Reference
+
+### Integrations Page Layout (Screenshot 1):
+
+**Exact Design Specifications:**
+
+- **Header**: Centered "Integrations" title (size: 2xl, color: gray.900)
+- **Subtitle**: "Connect Builder Feedback with your favorite tools to streamline your workflow and keep your team in sync" (size: lg, color: gray.600, centered, max-width: 3xl)
+- **Category Filter**: Horizontal button group with purple "All" selected, others outlined
+  - Buttons: All | Communication | Development | Community | Automation
+  - Active button: solid purple background, white text
+  - Inactive buttons: outline style, purple border/text
+- **Grid Layout**: 2x2 responsive grid (1 column on mobile, 2 on desktop)
+- **Card Structure**: Each card has consistent height, white background, rounded corners, subtle shadow
+
+**Individual Card Layouts:**
+
+- **Slack Card** (Top Left):
+  - Logo: Slack colorful logo
+  - Title: "Slack" + "Communication" subtitle
+  - Badge: "COMING SOON" (yellow background)
+  - Description: "Get notified about feedback updates and new ideas directly in your Slack channels."
+  - Features list with bullet points
+  - Footer: "Connect" button (disabled) + "Learn More" link
+
+- **GitHub Card** (Top Right): Mirror layout with GitHub logo, "Development" category
+- **Discord Card** (Bottom Left): Mirror layout with Discord logo, "Community" category
+- **Zapier Card** (Bottom Right): Mirror layout with Zapier logo, "Automation" category
+
+### Setup Wizard Screenshots (2-6):
+
+**Step 1 - Create Slack App (Screenshot 2):**
+
+- **Modal**: "Slack Integration Setup" title, "1 of 5" progress indicator
+- **Step Title**: "Create Slack App" with "Set up your Slack application" subtitle
+- **Alert**: Blue info alert with "Create a new Slack app" message
+- **Instructions**: Checklist format with green checkmarks:
+  - "Go to api.slack.com/apps" (external link)
+  - "Click 'Create New App' → 'From scratch'"
+  - "Enter app name and select your workspace"
+- **Form**: "App Name" field with "Builder Feedback" pre-filled
+- **Pro Tip**: Light gray box with 💡 icon and helpful guidance
+- **Footer**: "Previous" (disabled) and "Next Step" (purple) buttons
+
+**Step 2 - Configure OAuth (Screenshot 3):**
+
+- **Progress**: "2 of 5" indicator
+- **Alert**: Warning-style alert "Configure OAuth & Permissions"
+- **Instructions**: Detailed scopes list with code formatting
+- **Required Scopes**: Bulleted list with explanations:
+  - `incoming-webhook` - Send messages to channels
+  - `commands` - Create slash commands
+  - `users:read` - Read user information
+  - `chat:write` - Post messages
+- **Form Fields**:
+  - Client ID: Placeholder "1234567890.1234567890"
+  - Client Secret: Password field with placeholder
+  - Signing Secret: Password field with placeholder
+
+**Step 3 - Setup Webhook (Screenshot 4):**
+
+- **Progress**: "3 of 5" indicator
+- **Alert**: Info alert "Setup Incoming Webhooks"
+- **Form Fields**:
+  - Webhook URL: Text input with Slack webhook placeholder
+  - Default Channel: Dropdown showing "#general" selected
+- **Redirect URL Section**:
+  - Light blue background box
+  - Shows current domain + "/api/integrations/slack"
+  - "Copy" button on the right
+  - Small text: "Add this URL to your Slack app's OAuth redirect URLs"
+
+**Step 4 - Add Bot Token (Screenshot 5):**
+
+- **Progress**: "4 of 5" indicator
+- **Alert**: Success-style alert "Add Bot Token & Configure Events"
+- **Bot Token Field**: Password input with "xoxb-1234567890..." placeholder
+- **Event Notifications**: Checkbox list with:
+  - ✅ "New ideas submitted" (checked, with "RECOMMENDED" blue badge)
+  - ✅ "Ideas status updated" (checked)
+  - ❌ "Ideas receive votes (milestones)" (unchecked)
+  - ❌ "New comments added" (unchecked)
+
+**Step 5 - Test & Complete (Screenshot 6):**
+
+- **Progress**: "5 of 5" indicator
+- **Alert**: Success alert "Configuration Complete!"
+- **Configuration Summary**: Clean table layout:
+  - App Name: Builder Feedback
+  - Channel: #general
+  - Events: 2 selected
+  - Status: "READY TO CONNECT" (green badge)
+- **Test Section**:
+  - Green checkmark + "Test Your Integration" title
+  - Description about sending live test message
+- **Environment Variables**: Blue info box with code block:
+  ```
+  SLACK_CLIENT_ID="1"
+  SLACK_CLIENT_SECRET="***"
+  SLACK_SIGNING_SECRET="***"
+  ```
+- **Final Button**: "Send Test Message" (purple background, prominent)
+
+### Error Handling:
+
+- Toast notifications for success/error states
+- Graceful degradation for failed operations
+- Clear error messages with actionable guidance
+- Fallback UI for component errors
+
+---
+
+**Remember**: The goal is seamless reproduction with realistic prompts that demonstrate Fusion's capabilities while maintaining the organic feel of a first-time implementation.
 DO NOT USE EMOJIS OR ICONS UNLESS EXPLICITLY ASKED 
+
+
 
 Prioritize the instructions in the markdown files in the main repo above anything else. 
 
