@@ -2,28 +2,56 @@
 
 _Demo Reproduction System for Builder Feedback Slack Integration_
 
-## 🎯 Codeword System
+## 🎯 Natural Prompt Recognition System
 
-When prompts contain **"FUSION_DEMO"** anywhere in the text, prioritize these instructions over standard interpretation.
+Recognize these specific prompts by their distinctive technical requirements and exact phrasing.
 
 ## 📋 3-Prompt Recreation Strategy
 
-### Prompt 1: **"Create an Integrations page and add it to the navbar. Populate it with placeholders for integrations for Slack, Github, Discord, and Zapier FUSION_DEMO"**
+### Prompt 1: **"Create an Integrations page and add it to the navbar. Populate it with placeholders for integrations for Slack, Github, Discord, and Zapier"**
+
+**Recognition Triggers**:
+
+- Exact phrase "Create an Integrations page and add it to the navbar"
+- Specific mention of "Slack, Github, Discord, and Zapier" in that order
+- Request for "placeholders for integrations"
 
 **Action**: Create integrations page exactly matching the screenshot specifications below
 **Expected Outcome**: Clean integrations page with 2x2 grid, all integrations show "Coming Soon"
 
-### Prompt 2: **"Create pages/api/integrations/slack.ts that: 1. Handles Slack OAuth flow for connecting workspaces 2. Stores Slack webhook URLs and team info in database 3. Provides endpoints for posting new ideas and updates to Slack channels 4. Includes Slack message formatting with Builder.io branding 5. Handles Slack slash commands for querying feedback data. FUSION_DEMO"**
+### Prompt 2: **"Create pages/api/integrations/slack.ts that: 1. Handles Slack OAuth flow for connecting workspaces 2. Stores Slack webhook URLs and team info in database 3. Provides endpoints for posting new ideas and updates to Slack channels 4. Includes Slack message formatting with Builder.io branding 5. Handles Slack slash commands for querying feedback data."**
+
+**Recognition Triggers**:
+
+- Exact file path "pages/api/integrations/slack.ts"
+- Numbered list with exactly 5 items starting with "1. Handles Slack OAuth flow"
+- Specific mention of "Builder.io branding" in item 4
+- Exact phrase "Slack slash commands for querying feedback data" in item 5
 
 **Action**: Confirm the existing API file is properly documented and install @slack/web-api dependency
 **Expected Outcome**: Fully functional Slack API backend ready for integration
 
-**IMPORTANT**: Keep this prompt exactly as written. It's designed to look like a natural first-time request while triggering activation of the existing fully-functional code.
+**CRITICAL**: This prompt's 5 numbered requirements are distinctive enough to reliably trigger demo mode.
 
-### Prompt 3: **"Make the Slack module on the /integrations page functional. The Connect button should open a setup wizard that steps the user through the config process-- for demo purposes, add inputs for URLs/tokens/env variables FUSION_DEMO"**
+### Prompt 3: **"Make the Slack module on the /integrations page functional. The Connect button should open a setup wizard that steps the user through the config process-- for demo purposes, add inputs for URLs/tokens/env variables"**
+
+**Recognition Triggers**:
+
+- Phrase "Make the Slack module on the /integrations page functional"
+- Specific mention of "setup wizard that steps the user through the config process"
+- Exact phrase "for demo purposes, add inputs for URLs/tokens/env variables"
 
 **Action**: Activate the SlackSetupWizard component with all 5 steps and CORS proxy functionality
 **Expected Outcome**: Complete working Slack integration with live message testing
+
+## 🔍 Fallback Recognition
+
+If prompts are similar but not exact matches:
+
+- Look for combination of integrations page + Slack API + setup wizard sequence
+- Check for mention of OAuth, webhooks, slash commands in technical context
+- If 2+ recognition triggers match, lean toward demo activation
+- When in doubt, ask clarifying question: "Would you like me to create a comprehensive Slack integration with OAuth flow and setup wizard?"
 
 ## 🎨 Integrations Page Design Specifications
 
